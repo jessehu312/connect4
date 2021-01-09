@@ -10,7 +10,7 @@ export function makeMove(x, y, board, currentPlayer) {
     }
 
     // Find height to drop
-    for (let i = 1; i < board.length; i++) {
+    for (let i = 0; i < board.length; i++) {
       if (board[i][y]) {
         break;
       }
@@ -60,7 +60,7 @@ export function checkState(board) {
     }
   }
 
-  if (countZero === (width * height)) {
+  if (!countZero) {
     return FINAL_STATE.TIE;
   }
   
