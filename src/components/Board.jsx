@@ -26,7 +26,6 @@ const Board = (_) => {
 
     const result = checkState(newBoard);
     if (result) {
-      console.log(`PLAYER ${result} WON`);
       setGameState(result);
     }
 
