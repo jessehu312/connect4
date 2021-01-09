@@ -1,0 +1,23 @@
+.board {
+  background-color: orange;
+  padding: 5px;
+}
+
+.board.player1 {
+  background-color: red;
+}
+
+.board.player2 {
+  background-color: black;
+}
+
+.board.tie {
+  background-color: green;
+}
+
+.row {
+  background-color: yellow;
+  width: fit-content;
+  margin: auto;
+  height: fit-content;
+}

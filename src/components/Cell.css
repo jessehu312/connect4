@@ -1,0 +1,16 @@
+.cell {
+  display: inline-block;
+  background-color: white;
+  height: 50px;
+  width: 50px;
+  border-radius: 50px;
+  margin: 5px;
+}
+
+.cell.player1 {
+  background-color: red;
+}
+
+.cell.player2 {
+  background-color: black;
+}
