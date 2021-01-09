@@ -1,7 +1,8 @@
 const WIN_LENGTH = 4;
 
 export const PLAYER = { ONE: 1, TWO: 2};
-export const FINAL_STATE = { ONGOING: 0, ONE_WON: 1, TWO_WON: 2, TIE: 3}
+export const GAME_STATE = { ONGOING: 0, ONE_WON: 1, TWO_WON: 2, TIE: 3}
+export const GAME_TYPE = { SINGLE: 0, MULTIPLAYER: 1 }
 export const EMPTY_BOARD = 
 [
   [0,0,0,0,0,0,0],
@@ -12,6 +13,17 @@ export const EMPTY_BOARD =
   [0,0,0,0,0,0,0]
 ];
 
+export function lowestRow(y, board) {
+  let x = -1;
+  for (let i = 0; i < board.length; i++) {
+    if (board[i][y]) {
+      break;
+    }
+    x = i
+  }
+  return x;
+}
+
 export function makeMove(x, y, board, currentPlayer) {
     // Column is full
     if (board[0][y]) {
@@ -19,12 +31,7 @@ export function makeMove(x, y, board, currentPlayer) {
     }
 
     // Find height to drop
-    for (let i = 0; i < board.length; i++) {
-      if (board[i][y]) {
-        break;
-      }
-      x = i
-    }
+    x = lowestRow(y, board);
 
     const newBoard = [
       ...board.slice(0, x), 
@@ -70,7 +77,7 @@ export function checkState(board) {
   }
 
   if (!countZero) {
-    return FINAL_STATE.TIE;
+    return GAME_STATE.TIE;
   }
   
   // Vertical
@@ -149,5 +156,5 @@ export function checkState(board) {
     }
   }
 
-  return FINAL_STATE.ONGOING;
+  return GAME_STATE.ONGOING;
 }

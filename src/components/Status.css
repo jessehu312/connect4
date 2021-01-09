@@ -1,0 +1,15 @@
+.status.player1 {
+  color: red;
+}
+
+.status.player2 {
+  color: black;
+}
+
+.status.tie {
+  color: green;
+}
+
+.status.won {
+  font-weight: bolder;
+}
