@@ -1,6 +1,7 @@
 .board {
   background-color: orange;
   padding: 5px;
+  margin: 10px;
 }
 
 .board.player1 {
