@@ -1,6 +1,5 @@
-import logo from './logo.svg';
 import './App.css';
-import Board from './components/Board';
+import Game from './components/Game';
 
 function App() {
   return (
@@ -15,7 +14,7 @@ function App() {
         >
           <h1>Connect 4</h1>
         </a>
-        <Board/>
+        <Game/>
       </header>
     </div>
   );

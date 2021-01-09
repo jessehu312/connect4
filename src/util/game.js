@@ -2,6 +2,15 @@ const WIN_LENGTH = 4;
 
 export const PLAYER = { ONE: 1, TWO: 2};
 export const FINAL_STATE = { ONGOING: 0, ONE_WON: 1, TWO_WON: 2, TIE: 3}
+export const EMPTY_BOARD = 
+[
+  [0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0]
+];
 
 export function makeMove(x, y, board, currentPlayer) {
     // Column is full
@@ -76,7 +85,7 @@ export function checkState(board) {
     }
   }
 
-  //Diagonal1
+  //Diagonal - Down and Right
   for (let i = height - WIN_LENGTH; i >= 0; i--) {
     let j = 0;
     let k = i;
@@ -108,7 +117,7 @@ export function checkState(board) {
     }
   }
 
-  //Diagonal2
+  //Diagonal - Up and Right
   for (let i = WIN_LENGTH - 1; i < height; i++) {
     let j = 0;
     let k = i;
@@ -125,18 +134,20 @@ export function checkState(board) {
   }
 
   
-  for (let j = WIN_LENGTH - 1; j < width; j++) {
-    let i = 0;
+  for (let j = width - WIN_LENGTH; j > 0; j--) {
+    let i = height - 1;
     let k = j;
     last = 0;
     count = 0;
-    while (i < height && k >= 0) {
+    while (i > 0 && k < width) {
       const result = checkCell(i, k);
       if (result) {
         return result;
       }
-      i += 1
-      k -= 1;
+      i -= 1
+      k += 1;
     }
   }
+
+  return FINAL_STATE.ONGOING;
 }
