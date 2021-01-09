@@ -1,5 +1,6 @@
 {
   "name": "connect4-js",
+  "author": "Jesse Hu",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
