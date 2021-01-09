@@ -14,3 +14,11 @@
 .cell.player2 {
   background-color: black;
 }
+
+.cell.hovered.cell.player1 {
+  background-color: rgba(255, 0, 0, 0.65);
+}
+
+.cell.hovered.cell.player2 {
+  background-color: rgba(0, 0, 0, 0.65);
+}
