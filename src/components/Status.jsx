@@ -27,6 +27,9 @@ const GameStatus = ({gameState, currentPlayer}) => {
       className += " tie";
       status = "Tied";
       break;
+    case GAME_STATE.HOLD:
+      status = "Other Players Turn"
+      break;
     default:
       console.log(`??? ${gameState}`);
       break;

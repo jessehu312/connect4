@@ -4,11 +4,13 @@ import { useConfig } from '../context/ConfigProvider';
 import { GAME_TYPE } from '../util/game';
 
 const EventContext = createContext({
-  playerList: null
+  playerList: null,
+  eventEmitter: null
 });
 
-export function EventProvider({ children, playerName, gameType }) {
+export function EventProvider({ children, playerName, gameType, onMatch, onAccept }) {
   const [ playerList, setPlayerList] = useState(null);
+  const [ eventEmitter, setEventEmitter] = useState(null);
   const { radarClient } = useConfig();
 
   useEffect(() => {
@@ -36,7 +38,33 @@ export function EventProvider({ children, playerName, gameType }) {
           }
         });
         setPlayerList(data);
+        window.playerList = data;
       })
+
+      socket.on('challenged', (challengerId) => {
+        console.log(`${challengerId} challenged you`);
+        const newData = {};
+        Object.keys(window.playerList).map(id => {
+          if (id === challengerId) {
+            window.playerList[id].challenge = true;
+          }
+          newData[id] = window.playerList[id];
+        });
+        setPlayerList(newData);
+      });
+
+      socket.on('accept', data => onAccept(data, socket));
+      socket.on('match', onMatch);
+
+      setEventEmitter({
+        challenge: (playerId) => {
+          socket.emit('challenge', playerId);
+        },
+        match: (payload)=> {
+          socket.emit('accept', payload);
+        },
+        socket
+      });
 
       if (gameType !== GAME_TYPE.MULTIPLAYER) {
         socket.disconnect();
@@ -45,7 +73,7 @@ export function EventProvider({ children, playerName, gameType }) {
 
   }, []);
 
-  return <EventContext.Provider value={{ playerList }}>{children}</EventContext.Provider>
+  return <EventContext.Provider value={{ playerList, eventEmitter }}>{children}</EventContext.Provider>
 }
 
 export const useEvent = () => {

@@ -1,7 +1,7 @@
 const WIN_LENGTH = 4;
 
 export const PLAYER = { ONE: 1, TWO: 2};
-export const GAME_STATE = { ONGOING: 0, ONE_WON: 1, TWO_WON: 2, TIE: 3}
+export const GAME_STATE = { ONGOING: 0, ONE_WON: 1, TWO_WON: 2, TIE: 3, HOLD: 4}
 export const GAME_TYPE = { SINGLE: 0, MULTIPLAYER: 1 }
 export const EMPTY_BOARD = 
 [
