@@ -11,20 +11,13 @@ const EventContext = createContext({
 export function EventProvider({ children, playerName, gameType, onMatch, onAccept }) {
   const [ playerList, setPlayerList] = useState(null);
   const [ eventEmitter, setEventEmitter] = useState(null);
-  const { radarClient } = useConfig();
 
   useEffect(() => {
-    const chain = new Promise(resolve => {
-      navigator.geolocation.getCurrentPosition(pos => {
-        resolve(pos);
-      });
-    }).then(pos => {
       const socket = io('/');
   
       socket.on('connect', () => {
         console.log(`connected`);
         socket.emit('register', {
-            pos,
             id: socket.id,
             name: playerName
         });
@@ -69,7 +62,6 @@ export function EventProvider({ children, playerName, gameType, onMatch, onAccep
       if (gameType !== GAME_TYPE.MULTIPLAYER) {
         socket.disconnect();
       }
-    });
 
   }, []);
 

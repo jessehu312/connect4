@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Board from './Board';
 import Status from './Status';
 import Roster from './Roster';
@@ -43,6 +43,7 @@ const Game = (_) => {
     setBoard(EMPTY_BOARD);
     setPlayer(PLAYER.ONE);
     setGameState(GAME_STATE.ONGOING);
+    //TODO: Fix reset bug, two player 1
   };
 
   const onMatch = data => {
