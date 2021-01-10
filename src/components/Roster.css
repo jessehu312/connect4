@@ -2,3 +2,7 @@
   min-width: 25vw;
   background-color: lightgray;
 }
+
+.roster .challenger {
+  color: red;
+}
